@@ -1,0 +1,6 @@
+pytest
+pytest-cov
+requests
+flake8
+autoflake
+pytest-mock
