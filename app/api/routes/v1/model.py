@@ -14,7 +14,7 @@ def post_train(authenticated: bool = Depends(security.validate_request)):
 
 
 @router.get("/list", name="list models")
-def post_train(authenticated: bool = Depends(security.validate_request)):
+def get_list(authenticated: bool = Depends(security.validate_request)):
     model_service = ModelService()
     result = model_service.list_models()
     return result
