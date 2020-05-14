@@ -14,3 +14,5 @@ INVALID_MODEL_NAME_PARAMS = (
 )
 NO_DATA_FOR_COUNTRY = "No data for country {}."
 DATE_NOT_IN_RANGE = "Date {} not in range {} to {}."
+NO_LOG_FOUND = "No log for log_type {} and year {}, month {}, day {} found."
+INVALID_DATE = "Invalid date for given year {}, month {}, day {}."

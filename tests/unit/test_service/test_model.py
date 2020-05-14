@@ -8,7 +8,7 @@ def test_predict():
     model_service = ModelService()
     result = model_service.predict("all", 2018, 1, 2)
     assert "y_pred" in result
-    assert result["y_pred"][0] > 0
+    assert result["y_pred"] > 0
 
 
 def test_train():
