@@ -13,6 +13,13 @@ def post_train(authenticated: bool = Depends(security.validate_request)):
     return result
 
 
+@router.get("/list", name="list models")
+def post_train(authenticated: bool = Depends(security.validate_request)):
+    model_service = ModelService()
+    result = model_service.list_models()
+    return result
+
+
 @router.get("/predict", name="predict")
 def get_predict(
     country: str,

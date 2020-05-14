@@ -258,7 +258,7 @@ class ModelService(object):
         # persist model
         model_name = self._get_model_path(country, model_version)
         joblib.dump(full_model, os.path.join(app_cfg.MODEL_FOLDER, model_name))
-        logger.info("Successfully trained model %s", model_name)
+        logger.info("Successfully trained model {}".format(model_name))
 
     def predict(self, country: str, year: int, month: int, day: int):
         logger.info("Predicting")
@@ -301,4 +301,15 @@ class ModelService(object):
             self._train_for_country(df, country)
 
         logger.info("Finished training models")
-        return "Finished training models"
+        return "Finished model training"
+
+    def list_models(self):
+        logger.info("Listing models")
+
+        model_info = {}
+
+        for country in self._get_countries():
+            latest_model = self._get_latest_model_for_country(country)
+            model_info[country] = latest_model
+
+        return model_info
