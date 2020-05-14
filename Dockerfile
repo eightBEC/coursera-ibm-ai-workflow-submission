@@ -12,4 +12,6 @@ RUN pip install -r requirements-test.txt
 
 COPY . ./
 
+ENV API_KEY=41e1dc1e-ccda-4cfa-9fbc-c10b9fd8c0ba
+
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
