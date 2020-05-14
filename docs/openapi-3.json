@@ -1,0 +1,162 @@
+{
+  "openapi": "3.0.2",
+  "info": { "title": "AI Workflow Capstone Submission", "version": "0.0.1" },
+  "paths": {
+    "/api/v1/model/train": {
+      "post": {
+        "tags": ["model"],
+        "summary": "Train",
+        "operationId": "train_api_v1_model_train_post",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        },
+        "security": [{ "APIKeyHeader": [] }]
+      }
+    },
+    "/api/v1/model/list": {
+      "get": {
+        "tags": ["model"],
+        "summary": "List Models",
+        "operationId": "list_models_api_v1_model_list_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          }
+        },
+        "security": [{ "APIKeyHeader": [] }]
+      }
+    },
+    "/api/v1/model/predict": {
+      "get": {
+        "tags": ["model"],
+        "summary": "Predict",
+        "operationId": "predict_api_v1_model_predict_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Country", "type": "string" },
+            "name": "country",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": { "title": "Year", "type": "integer" },
+            "name": "year",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": { "title": "Month", "type": "integer" },
+            "name": "month",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": { "title": "Day", "type": "integer" },
+            "name": "day",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "APIKeyHeader": [] }]
+      }
+    },
+    "/api/v1/logs/{log_type}/{year}/{month}/{day}": {
+      "get": {
+        "tags": ["logs"],
+        "summary": "Logs",
+        "operationId": "logs_api_v1_logs__log_type___year___month___day__get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": { "title": "Year", "type": "integer" },
+            "name": "year",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": { "title": "Month", "type": "integer" },
+            "name": "month",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": { "title": "Day", "type": "integer" },
+            "name": "day",
+            "in": "path"
+          },
+          {
+            "required": true,
+            "schema": { "title": "Log Type", "type": "string" },
+            "name": "log_type",
+            "in": "path"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": { "application/json": { "schema": {} } }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/HTTPValidationError" }
+              }
+            }
+          }
+        },
+        "security": [{ "APIKeyHeader": [] }]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ValidationError" }
+          }
+        }
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": ["loc", "msg", "type"],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "msg": { "title": "Message", "type": "string" },
+          "type": { "title": "Error Type", "type": "string" }
+        }
+      }
+    },
+    "securitySchemes": {
+      "APIKeyHeader": { "type": "apiKey", "in": "header", "name": "token" }
+    }
+  }
+}
